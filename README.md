@@ -25,10 +25,11 @@ For ``asm.js`` compilation ``asmjs-unknown-emscripten`` target has to be added w
 rustup target add asmjs-unknown-emscripten
 ```
 
-Compilation steps can be found in the ``makefile`` in the main directory and executed with:
+Compilation steps can be found in the ``makefile`` in the main directory and executed simply by
+running:
 
 ```
-make asmjs
+make
 ```
 
 
@@ -39,6 +40,15 @@ working in browser only (not with Node.js) and not ready for production use!
 
 Start a server with ``python -m SimpleHTTPServer`` and browse to http://localhost:8000/. You might have
 to modify the ``exp/index.html`` file to get things to work.
+
+### Testing
+
+Unit tests can be found in the ``tests`` directory. Run the tests with:
+
+```
+npm run test
+```
+
 
 ## Additional Resources
 

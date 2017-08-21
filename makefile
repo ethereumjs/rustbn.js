@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-asmjs:
+all:
 	cargo build --target=asmjs-unknown-emscripten --release
 	mkdir -p lib
 	find target/asmjs-unknown-emscripten/release -type f -name "rustbn-js.js" | xargs -I {} cp {} lib/index.asm.js

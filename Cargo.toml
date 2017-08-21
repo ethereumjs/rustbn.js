@@ -10,3 +10,4 @@ rand = "0.3"
 rustc-serialize = "0.3"
 num = "0.1"
 hex-slice = "0.1.0"
+

@@ -9,20 +9,14 @@ extern crate bn;
 extern crate rand;
 extern crate num;
 extern crate rustc_serialize;
-
 extern crate hex_slice;
 
 use hex_slice::AsHex;
-
 //use num::bigint::BigInt;
 use num::bigint::BigUint;
-
 use bn::*;
-
 use rustc_serialize::hex::FromHex;
-
 use std::io::{self, Read};
-
 
 
 #[derive(Debug)]
