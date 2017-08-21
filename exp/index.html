@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <script>
+            
+            function overwriteConsoleLog () {
+              var old = console.log;
+              var logger = document.getElementById('log');
+              console.log = function (message) {
+                if (typeof message == 'object') {
+                  logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(message) : message) + '<br />';
+                } else {
+                  logger.innerHTML += message + '<br />';
+                }
+              }
+            }
+        
+        
+            // This is read and used by `site.js`
+            var Module = {
+                wasmBinaryFile: "rustbn.wasm",
+                onRuntimeInitialized: main,
+            }
+            function main() {
+              overwriteConsoleLog();
+              
+              //let add = Module.cwrap('add', 'number', ['number', 'number']);
+              //let bn128 = Module.cwrap('bn128', 'number', []);
+              
+              console.log('Do something with the Rust functions exposed here!');
+              //console.log(add(1, 2));
+              
+              //console.log('Doing ecadd and ecmul.');
+              //console.log(bn128());
+            }
+        </script>
+        <script src="index.wasm.js"></script>
+    </head>
+    <body>
+      <div id="log"></div>
+    </body>
+</html>
