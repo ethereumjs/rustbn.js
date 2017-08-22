@@ -49,7 +49,6 @@ Unit tests can be found in the ``tests`` directory. Run the tests with:
 npm run test
 ```
 
-
 ## Additional Resources
 
 - Another [compilation tutorial](https://medium.com/@ianjsikes/get-started-with-rust-webassembly-and-webpack-58d28e219635) using ``Webpack``
@@ -57,5 +56,15 @@ npm run test
 - [Compiling Rust to your Browser](https://www.hellorust.com/emscripten/)
 
 
+## License
+
+Licensed under either of
+
+ * MIT license, ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
+ * Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
+
+at your option.
+
+Copyright 2016 [Zcash Electric Coin Company](https://z.cash/). The Zcash Company promises to maintain the "bn" crate on crates.io under this MIT/Apache-2.0 dual license.
 
  
