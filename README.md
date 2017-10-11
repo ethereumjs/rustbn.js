@@ -7,11 +7,38 @@ pairing cryptography library](https://github.com/zcash/bn), implementing an effi
 
 ## Installation
 
-TODO
+`npm install rustbn.js`
 
 ## Usage
 
-TODO
+Require the module:
+
+```
+const bn128Module = require('rustbn.js')
+```
+
+Curve Addition
+
+```
+const ecAddPrecompile = bn128Module.cwrap('ec_add', 'string', ['string'])
+var inputHexStr = '...'
+let result = ecAddPrecompile(inputHexStr)
+```
+
+Curve Multiplication
+
+```
+const ecMulPrecompile = bn128Module.cwrap('ec_mul', 'string', ['string'])
+var inputHexStr = '...'
+let result = ecMulPrecompile(inputHexStr)
+```
+
+Curve Pairing
+```
+const ecPairingPrecompile = bn128Module.cwrap('ec_pairing', 'string', ['string'])
+var inputHexStr = '...'
+let result = ecPairingPrecompile(inputHexStr)
+```
 
 ## Developer
 
