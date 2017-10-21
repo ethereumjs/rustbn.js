@@ -21,7 +21,6 @@ impl From<&'static str> for Error {
 	}
 }
 
-
 fn read_fr(reader: &mut io::Chain<&[u8], io::Repeat>) -> Result<::bn::Fr, Error> {
 	use bn::Fr;
 	let mut buf = [0u8; 32];
@@ -61,21 +60,29 @@ pub fn ec_mul(input_hex_ptr: *const c_char) -> *const c_char {
 	let input_parsed = FromHex::from_hex(input_str).unwrap();
 	let mut padded_input = input_parsed.chain(io::repeat(0));
 
-	let p1 = read_point(&mut padded_input).unwrap();
-	let fr = read_fr(&mut padded_input).unwrap();
-
-	let mut ecmul_output_buf = [0u8; 64];
-	if let Some(sum) = AffineG1::from_jacobian(p1 * fr) {
-		// point not at infinity
-		sum.x().to_big_endian(&mut ecmul_output_buf[0..32]).expect("Cannot fail since 0..32 is 32-byte length");
-		sum.y().to_big_endian(&mut ecmul_output_buf[32..64]).expect("Cannot fail since 32..64 is 32-byte length");;
+        let p1;
+        match read_point(&mut padded_input) {
+            Ok(p)  => { p1 = p; },
+            Err(_) => { return b"" as *const c_char }
+        }
+    
+        let fr;
+        match read_fr(&mut padded_input) {
+            Ok(f)  => { fr = f; },
+            Err(_) => { return b"" as *const c_char }
+        }
+    
+        let mut ecmul_output_buf = [0u8; 64];
+        if let Some(sum) = AffineG1::from_jacobian(p1 * fr) {
+            // point not at infinity
+	    sum.x().to_big_endian(&mut ecmul_output_buf[0..32]).expect("Cannot fail since 0..32 is 32-byte length");
+	    sum.y().to_big_endian(&mut ecmul_output_buf[32..64]).expect("Cannot fail since 32..64 is 32-byte length");;
 	}
-
-	let mut ec_mul_output_str = ecmul_output_buf.to_hex();
-	ec_mul_output_str.push_str("\0");
-	return ec_mul_output_str.as_ptr()
+    
+        let mut ec_mul_output_str = ecmul_output_buf.to_hex();
+        ec_mul_output_str.push_str("\0");
+        return ec_mul_output_str.as_ptr()
 }
-
 
 
 #[no_mangle]
@@ -94,25 +101,34 @@ pub fn ec_add(input_hex_ptr: *const c_char) -> *const c_char {
 	let point2 = &padded_buf[64..128];
 
 	let mut point1_padded = point1.chain(io::repeat(0));
-	let mut point2_padded = point2.chain(io::repeat(0));
+        let mut point2_padded = point2.chain(io::repeat(0));
 
-	let p1 = read_point(&mut point1_padded).unwrap();
-	let p2 = read_point(&mut point2_padded).unwrap();
+        let mut point_correct = false;
 
-	let mut ecadd_output_buf = [0u8; 64];
+        let p1;
+        match read_point(&mut point1_padded) {
+            Ok(p) => {
+                p1 = p;
+            },
+            Err(_) => { return b"" as *const c_char }
+        }
 
-	if let Some(sum) = AffineG1::from_jacobian(p1 + p2) {
-		// point not at infinity
-		sum.x().to_big_endian(&mut ecadd_output_buf[0..32]).expect("Cannot fail since 0..32 is 32-byte length");
-		sum.y().to_big_endian(&mut ecadd_output_buf[32..64]).expect("Cannot fail since 32..64 is 32-byte length");;
-	}
+        match read_point(&mut point2_padded) {
+            Ok(p) => {
+                let p2 = p;
+                let mut ecadd_output_buf = [0u8; 64];
+                if let Some(sum) = AffineG1:: from_jacobian(p1 + p2) {
+                    sum.x().to_big_endian(&mut ecadd_output_buf[0..32]).expect("Cannot fail since 0..32 is 32-byte length");
+	            sum.y().to_big_endian(&mut ecadd_output_buf[32..64]).expect("Cannot fail since 32..64 is 32-byte length");;
+                }
+                let mut ec_add_output_str = ecadd_output_buf.to_hex();
+                ec_add_output_str.push_str("\0");
+                return ec_add_output_str.as_ptr()                
+            },
+            Err(_) => { return b"" as *const c_char }
+        }
 
-	let mut ec_add_output_str = ecadd_output_buf.to_hex();
-	ec_add_output_str.push_str("\0");
-	return ec_add_output_str.as_ptr()
 }
-
-
 
 #[no_mangle]
 pub fn ec_pairing(input_hex_ptr: *const c_char) -> *const c_char {
@@ -125,8 +141,8 @@ pub fn ec_pairing(input_hex_ptr: *const c_char) -> *const c_char {
 
 	let elements = input.len() / 192;
 
-	if input.len() % 192 != 0 {
-		panic!("Invalid input length, must be multiple of 192 (3 * (32*2))");
+        if input.len() % 192 != 0 {
+                return b"" as *const c_char;
 	}
 
 	let ret_val = if input.len() == 0 {
@@ -135,23 +151,41 @@ pub fn ec_pairing(input_hex_ptr: *const c_char) -> *const c_char {
 		let mut vals = Vec::new();
 		
 		for idx in 0..elements {
-			let x_1 = Fq::from_slice(&input[idx*192..idx*192+32])
-				.expect("Invalid a argument x coordinate");
+                        let x_1;
+                        match Fq::from_slice(&input[idx*192..idx*192+32]) {
+                            Ok(fq) => { x_1 = fq },
+                            Err(_) => { return b"" as *const c_char }
+                        }
 
-			let y_1 = Fq::from_slice(&input[idx*192+32..idx*192+64])
-				.expect("Invalid a argument y coordinate");
+                        let y_1;
+                        match Fq::from_slice(&input[idx*192+32..idx*192+64]) {
+                            Ok(fq) => { y_1 = fq },
+                            Err(_) => { return b"" as *const c_char }
+                        }
 
-			let x2_i = Fq::from_slice(&input[idx*192+64..idx*192+96])
-				.expect("Invalid b argument imaginary coeff x coordinate");
+                        let x2_i;
+                        match Fq::from_slice(&input[idx*192+64..idx*192+96]) {
+                            Ok(fq) => { x2_i = fq },
+                            Err(_) => { return b"" as *const c_char }
+                        }
 
-			let x2_r = Fq::from_slice(&input[idx*192+96..idx*192+128])
-				.expect("Invalid b argument imaginary coeff y coordinate");
+                        let x2_r;
+                        match Fq::from_slice(&input[idx*192+96..idx*192+128]) {
+                            Ok(fq) => { x2_r = fq },
+                            Err(_) => { return b"" as *const c_char }
+                        }
 
-			let y2_i = Fq::from_slice(&input[idx*192+128..idx*192+160])
-				.expect("Invalid b argument real coeff x coordinate");
+                        let y2_i;
+                        match Fq::from_slice(&input[idx*192+128..idx*192+160]) {
+                            Ok(fq) => { y2_i = fq },
+                            Err(_) => { return b"" as *const c_char }
+                        }
 
-			let y2_r = Fq::from_slice(&input[idx*192+160..idx*192+192])
-				.expect("Invalid b argument real coeff y coordinate");
+                        let y2_r;
+                        match Fq::from_slice(&input[idx*192+160..idx*192+192]) {
+                            Ok(fq) => { y2_r = fq },
+                            Err(_) => { return b"" as *const c_char }
+                        }
 
 			//println!("creating g1_point with x1 and y1...");
 			//println!("x1: {:?}  y1: {:?}", x_1, y_1);
@@ -160,7 +194,13 @@ pub fn ec_pairing(input_hex_ptr: *const c_char) -> *const c_char {
 			if x_1 == Fq::zero() && y_1 == Fq::zero() {
 				g1_point = G1::zero();
 			} else {
-				g1_point = G1::from(AffineG1::new(x_1, y_1).expect("Invalid a argument - not on curve"));
+                               match AffineG1::new(x_1, y_1) {
+                                   Ok(ap) => {
+                                       let g1_affine_point = ap;
+                                       g1_point = G1::from(g1_affine_point);
+                                   },
+                                   Err(_) => { return b"" as *const c_char }
+                               }
 			}
 
 			/*
@@ -173,14 +213,19 @@ pub fn ec_pairing(input_hex_ptr: *const c_char) -> *const c_char {
 			*/
 
 			let fq2_x = Fq2::new(x2_r, x2_i);
-			let fq2_y = Fq2::new(y2_r, y2_i);
-
+		        let fq2_y = Fq2::new(y2_r, y2_i);
+                    
 			let g2_point;
 			if x2_r.is_zero() && x2_i.is_zero() && y2_r.is_zero() && y2_i.is_zero() {
 				g2_point = G2::zero();
 			} else {
-				let g2_affine_point = AffineG2::new(fq2_x, fq2_y).expect("Invalid b argument - not on curve");
-				g2_point = G2::from(g2_affine_point);
+                            match AffineG2::new(fq2_x, fq2_y) {
+                                Ok (ap) => {
+                                    let g2_affine_point = ap;
+                                    g2_point = G2::from(g2_affine_point);
+                                },
+                                Err(_) => { return b"" as *const c_char}
+                            }
 			}
 
 			vals.push((g1_point, g2_point));
