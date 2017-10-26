@@ -10,4 +10,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 - Initial release
 
 
-
+## [0.1.1] - 2017-10-26
+- avoid exceptions and return an emtpy value instead
+- Added cargo config to set flag `NO_DYNAMIC_EXECUTION = 1` to avoid introducing the eval function

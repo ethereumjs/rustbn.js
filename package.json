@@ -1,6 +1,6 @@
 {
   "name": "rustbn.js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Javascript bindings for https://github.com/paritytech/bn (using asm.js)",
   "main": "index.js",
   "scripts": {
