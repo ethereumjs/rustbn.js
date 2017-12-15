@@ -5,6 +5,7 @@ all:
 	mkdir -p lib
 	find target/asmjs-unknown-emscripten/release -type f -name "rustbn-js.js" | xargs -I {} cp {} lib/index.asm.js
 	sed -ibak 's/run()$$/Module\["arguments"\]=\[\];run();module\.exports=Module;/' lib/index.asm.js
+	sed -ibak 's/process\["on"\]("uncaughtException",(function(ex){if(!(ex instanceof ExitStatus)){throw ex}}))/\/\*removed uncaught exception exit\*\//' lib/index.asm.js
 
 wasm:
 	cargo build --target=wasm32-unknown-emscripten --release
