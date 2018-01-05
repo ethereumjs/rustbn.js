@@ -13,10 +13,11 @@
   "keywords": [
     "ethereum",
     "ecc",
+    "bn128",
     "pairing"
   ],
   "author": "",
-  "license": "ISC",
+  "license": "(MIT OR Apache-2.0)",
   "bugs": {
     "url": "https://github.com/ethereumjs/rustbn.js/issues"
   },
