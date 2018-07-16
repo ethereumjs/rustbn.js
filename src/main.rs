@@ -102,8 +102,6 @@ pub fn ec_add(input_hex_ptr: *const c_char) -> *const c_char {
 	let mut point1_padded = point1.chain(io::repeat(0));
         let mut point2_padded = point2.chain(io::repeat(0));
 
-        let mut point_correct = false;
-
         let p1;
         match read_point(&mut point1_padded) {
             Ok(p) => {
