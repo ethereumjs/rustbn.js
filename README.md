@@ -14,30 +14,27 @@ pairing cryptography library](https://github.com/zcash/bn), implementing an effi
 Require the module:
 
 ```
-const bn128Module = require('rustbn.js')
+const bn128 = require('rustbn.js')
 ```
 
 Curve Addition
 
 ```
-const ecAddPrecompile = bn128Module.cwrap('ec_add', 'string', ['string'])
-var inputHexStr = '...'
-let result = ecAddPrecompile(inputHexStr)
+let inputBuffer = ...
+let outputBuffer = bn128.add(inputBuffer)
 ```
 
 Curve Multiplication
 
 ```
-const ecMulPrecompile = bn128Module.cwrap('ec_mul', 'string', ['string'])
-var inputHexStr = '...'
-let result = ecMulPrecompile(inputHexStr)
+let inputBuffer = ...
+let outputBuffer = bn128.mul(inputBuffer)
 ```
 
 Curve Pairing
 ```
-const ecPairingPrecompile = bn128Module.cwrap('ec_pairing', 'string', ['string'])
-var inputHexStr = '...'
-let result = ecPairingPrecompile(inputHexStr)
+let inputBuffer = ...
+let outputBuffer = bn128.pairing(inputBuffer)
 ```
 
 ## Developer

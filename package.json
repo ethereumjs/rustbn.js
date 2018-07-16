@@ -20,7 +20,11 @@
   "contributors": [
     {
       "name": "holgerd77",
-      "email": "Holger.Drewes@gmail.com>"
+      "email": "Holger.Drewes@gmail.com"
+    },
+    {
+      "name": "Alex Beregszaszi",
+      "email": "alex@rtfs.hu"
     }
   ],
   "license": "(MIT OR Apache-2.0)",
