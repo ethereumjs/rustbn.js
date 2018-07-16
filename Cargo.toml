@@ -2,7 +2,8 @@
 name = "rustbn-js"
 version = "0.1.2"
 authors = ["holgerd77 <Holger.Drewes@gmail.com>",
-           "cdetrio <cdetrio@gmail.com>",]
+           "cdetrio <cdetrio@gmail.com>",
+           "Alex Beregszaszi <alex@rtfs.hu>"]
 publish = false
 
 [dependencies]
