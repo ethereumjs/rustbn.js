@@ -81,7 +81,7 @@ pub fn ec_mul(input_hex_ptr: *const c_char) -> *const c_char {
     
         let mut ec_mul_output_str = ecmul_output_buf.to_hex();
         ec_mul_output_str.push_str("\0");
-        return ec_mul_output_str.as_ptr()
+        return ec_mul_output_str.as_ptr() as *const c_char
 }
 
 
@@ -123,7 +123,7 @@ pub fn ec_add(input_hex_ptr: *const c_char) -> *const c_char {
                 }
                 let mut ec_add_output_str = ecadd_output_buf.to_hex();
                 ec_add_output_str.push_str("\0");
-                return ec_add_output_str.as_ptr()                
+                return ec_add_output_str.as_ptr() as *const c_char
             },
             Err(_) => { return b"" as *const c_char }
         }
@@ -224,7 +224,7 @@ pub fn ec_pairing(input_hex_ptr: *const c_char) -> *const c_char {
                                     let g2_affine_point = ap;
                                     g2_point = G2::from(g2_affine_point);
                                 },
-                                Err(_) => { return b"" as *const c_char}
+                                Err(_) => { return b"" as *const c_char }
                             }
 			}
 
@@ -245,7 +245,7 @@ pub fn ec_pairing(input_hex_ptr: *const c_char) -> *const c_char {
 	//println!("ec_pairing_output_str: {:?}", ec_pairing_output_str);
 
 	ec_pairing_output_str.push_str("\0");
-	return ec_pairing_output_str.as_ptr()
+	return ec_pairing_output_str.as_ptr() as *const c_char
 }
 
 
