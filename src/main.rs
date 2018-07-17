@@ -1,8 +1,5 @@
 extern crate bn;
-extern crate rand;
-extern crate num;
 extern crate rustc_serialize;
-extern crate hex_slice;
 
 use std::os::raw::c_char;
 use std::ffi::CStr;
