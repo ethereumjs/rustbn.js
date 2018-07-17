@@ -234,7 +234,7 @@ pub fn ec_pairing(input_hex_ptr: *const c_char) -> *const c_char {
 	};
 
 	let mut ec_pairing_output_buf = [0u8; 32];
-	ret_val.to_big_endian(&mut ec_pairing_output_buf);
+	ret_val.to_big_endian(&mut ec_pairing_output_buf).expect("Cannot fail since buf is 32-byte length");
 	let mut ec_pairing_output_str = ec_pairing_output_buf.to_hex();
 	//println!("ec_pairing_output_str: {:?}", ec_pairing_output_str);
 
