@@ -5,6 +5,8 @@
 Rust to Javascript compile of the [Parity fork](https://github.com/paritytech/bn) of the [Zcash bn
 pairing cryptography library](https://github.com/zcash/bn), implementing an efficient bilinear pairing on the Barreto-Naehrig (BN) curve. 
 
+It implements helpers to support the functionality defined in [EIP-196](https://eips.ethereum.org/EIPS/eip-196) and [EIP-197](https://eips.ethereum.org/EIPS/eip-197).
+
 ## Installation
 
 `npm install rustbn.js`
@@ -92,5 +94,4 @@ Licensed under either of
 at your option.
 
 Copyright 2016 [Zcash Electric Coin Company](https://z.cash/). The Zcash Company promises to maintain the "bn" crate on crates.io under this MIT/Apache-2.0 dual license.
-
  
