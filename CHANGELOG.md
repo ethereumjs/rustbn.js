@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [0.2.0] - 2018-07-19
+- Added successful test case for each operation, PR[#19](https://github.com/ethereumjs/rustbn.js/pull/19)
+- Better Javascript API, PR[#20](https://github.com/ethereumjs/rustbn.js/pull/20) - breaking change
+- Support for Rust 1.24, PR[#22](https://github.com/ethereumjs/rustbn.js/pull/22)
+
+[0.2.0]: https://github.com/ethereumjs/rustbn.js/compare/v0.1.2...v0.2.0
+
 ## [0.1.2] - 2018-02-09
 - Added ``Cargo`` flag to avoid generated code catching all exceptions, PR [#11](https://github.com/ethereumjs/rustbn.js/pull/11)
 - More robust build with ``sed`` validation, PR [#14](https://github.com/ethereumjs/rustbn.js/pull/14)
