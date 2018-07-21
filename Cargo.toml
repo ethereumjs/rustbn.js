@@ -7,5 +7,5 @@ authors = ["holgerd77 <Holger.Drewes@gmail.com>",
 publish = false
 
 [dependencies]
-bn = { git = "https://github.com/cdetrio/bn", branch = "mont-repr-fix" }
+bn = { git = "https://github.com/paritytech/bn", default-features = false }
 rustc-hex = "1.0"
