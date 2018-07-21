@@ -1,11 +1,11 @@
 extern crate bn;
-extern crate rustc_serialize;
+extern crate rustc_hex;
 
 use std::os::raw::c_char;
 use std::ffi::CStr;
 
-use rustc_serialize::hex::FromHex;
-use rustc_serialize::hex::ToHex;
+use rustc_hex::FromHex;
+use rustc_hex::ToHex;
 use std::io::{self, Read};
 
 #[derive(Debug)]
@@ -44,8 +44,6 @@ fn read_point(reader: &mut io::Chain<&[u8], io::Repeat>) -> Result<::bn::G1, Err
 		}
 	)
 }
-
-
 
 #[no_mangle]
 pub fn ec_mul(input_hex_ptr: *const c_char) -> *const c_char {
