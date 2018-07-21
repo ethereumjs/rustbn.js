@@ -2,7 +2,9 @@
 [![Build Status](https://img.shields.io/travis/ethereumjs/rustbn.js.svg?branch=master&style=flat-square)](https://travis-ci.org/ethereumjs/rustbn.js)
 [![Gitter](https://img.shields.io/gitter/room/ethereum/ethereumjs-lib.svg?style=flat-square)](https://gitter.im/ethereum/ethereumjs-lib) or #ethereumjs on freenode  
 
-Rust to Javascript compile of the [Parity fork](https://github.com/paritytech/bn) of the [Zcash bn
+Rust to Javascript/Webassembly compilation of [ethereum-bn128.rs](https://github.com/ewasm/ethereum-bn128.rs).
+
+Internally it uses the [Parity fork](https://github.com/paritytech/bn) of the [Zcash bn
 pairing cryptography library](https://github.com/zcash/bn), implementing an efficient bilinear pairing on the Barreto-Naehrig (BN) curve. 
 
 It implements helpers to support the functionality defined in [EIP-196](https://eips.ethereum.org/EIPS/eip-196) and [EIP-197](https://eips.ethereum.org/EIPS/eip-197).
