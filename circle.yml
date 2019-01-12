@@ -7,6 +7,10 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Link emcc
+          command: |
+            emcc --version
+      - run:
           name: Check formatting
           command: |
             rustfmt --version
