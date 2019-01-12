@@ -12,6 +12,7 @@ jobs:
             source /root/emsdk-master/emsdk_env.sh
             source /root/.cargo/env
             export PATH=$PATH:/root/emsdk-master/clang/*/
+            llvm-nm --version
             emcc --version
             rustfmt --version
             cargo fmt
