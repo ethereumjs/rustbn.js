@@ -9,7 +9,7 @@ jobs:
       - run:
           name: Go
           command: |
-            echo $PATH
+            source /root/emsdk-master/emsdk_env.sh
             emcc --version
             rustfmt --version
             cargo fmt
