@@ -3,16 +3,9 @@ version: 2
 jobs:
   build:
     docker:
-      - image: rust:1
+      - image: jeremigendron/rust-emcc
     steps:
       - checkout
-      - run:
-          name: Update rustc
-          command: |
-            rustup target add wasm32-unknown-unknown
-            rustup target add asmjs-unknown-emscripten
-            rustup component add rustfmt-preview
-            rustup update
       - run:
           name: Check formatting
           command: |
