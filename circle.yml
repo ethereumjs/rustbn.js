@@ -3,9 +3,18 @@ version: 2
 jobs:
   build:
     docker:
-      - image: jeremigendron/rust-asmjs-wasm
+      - image: procrat/rust-asmjs
     steps:
       - checkout
+      - run:
+          name: Init emcc
+          command: |
+            emcc --version
+      - run:
+          name: Install deps
+          command: |
+            rustup component add rustfmt-preview
+            rustup update
       - run:
           name: Check formatting
           command: |
@@ -13,7 +22,7 @@ jobs:
             cargo fmt
             git diff --exit-code
       - run:
-          name: Cargo Build
+          name: Cargo build
           command: cargo build --release --target asmjs-unknown-emscripten
       - run:
           name: Make All
