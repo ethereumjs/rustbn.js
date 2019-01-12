@@ -3,18 +3,9 @@ version: 2
 jobs:
   build:
     docker:
-      - image: procrat/rust-asmjs
+      - image: jeremigendron/rustbn_js
     steps:
       - checkout
-      - run:
-          name: Init emcc
-          command: |
-            emcc --version
-      - run:
-          name: Install deps
-          command: |
-            rustup component add rustfmt-preview
-            rustup update
       - run:
           name: Check formatting
           command: |
