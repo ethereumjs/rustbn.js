@@ -9,9 +9,9 @@ jobs:
       - run:
           name: Go
           command: |
-            . /root/.cargo/env
-            . /emsdk-portable/emsdk_env.sh
+            echo $PATH
+            emcc --version
             rustfmt --version
             cargo fmt
             git diff --exit-code
-            whoami
+            make
