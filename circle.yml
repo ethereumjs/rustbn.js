@@ -7,13 +7,11 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Check formatting
+          name: Go
           command: |
             . /root/.cargo/env
             . /emsdk-portable/emsdk_env.sh
             rustfmt --version
             cargo fmt
             git diff --exit-code
-      - run:
-          name: Make
-          command: make
+            make
