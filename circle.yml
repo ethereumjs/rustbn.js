@@ -3,7 +3,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: jeremigendron/rustbn_js
+      - image: jeremigendron/custom-test
     steps:
       - checkout
       - run:
