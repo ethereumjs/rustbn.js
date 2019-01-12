@@ -13,6 +13,9 @@ jobs:
             emcc --version
             rustup override set nightly
             rustup component add rustfmt
+            rustup target add wasm32-unknown-emscripten
+            rustup target add asmjs-unknown-emscripten
+
       - run:
           name: Check formatting
           command: |
