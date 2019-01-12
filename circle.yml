@@ -1,0 +1,20 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: jeremigendron/emcc-rust:ubuntu
+    steps:
+      - checkout
+      - run:
+          name: Check formatting
+          command: |
+            rustfmt --version
+            cargo fmt
+            git diff --exit-code
+      - run:
+          name: Cargo Build
+          command: cargo build --release --target asmjs-unknown-emscripten
+      - run:
+          name: Make All
+          command: make
