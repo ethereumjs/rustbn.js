@@ -9,6 +9,8 @@ jobs:
       - run:
           name: Check formatting
           command: |
+            . /root/.cargo/env
+            . /emsdk-portable/emsdk_env.sh
             rustfmt --version
             cargo fmt
             git diff --exit-code
