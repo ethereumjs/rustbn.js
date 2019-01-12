@@ -3,35 +3,22 @@ version: 2
 jobs:
   build:
     docker:
-      - image: jeremigendron/custom-test
+      - image: rust:1
     steps:
       - checkout
       - run:
-          name: Get deps
+          name: Update rustc
           command: |
-            source /root/emsdk-portable/emsdk_env.sh
-            emcc --version
-            rustup override set nightly
-            rustup component add rustfmt
-            rustup target add wasm32-unknown-emscripten
+            rustup target add wasm32-unknown-unknown
             rustup target add asmjs-unknown-emscripten
-
+            rustup component add rustfmt-preview
+            rustup update
       - run:
           name: Check formatting
           command: |
-            rustup override set nightly
             rustfmt --version
             cargo fmt
             git diff --exit-code
       - run:
-          name: Cargo build
-          command: |
-            source /root/emsdk-portable/emsdk_env.sh
-            rustup override set nightly
-            cargo build --release --target asmjs-unknown-emscripten
-      - run:
-          name: Make All
-          command: |
-            source /root/emsdk-portable/emsdk_env.sh
-            rustup override set nightly
-            make
+          name: Make
+          command: make
