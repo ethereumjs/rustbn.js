@@ -21,10 +21,10 @@ jobs:
       - run:
           name: Cargo build
           command: |
-            source /root/.bashrc
+            source /root/emsdk-portable/emsdk_env.sh
             cargo build --release --target asmjs-unknown-emscripten
       - run:
           name: Make All
           command: |
-            source /root/.bashrc 
+            source /root/emsdk-portable/emsdk_env.sh
             make
