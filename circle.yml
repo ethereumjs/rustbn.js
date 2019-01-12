@@ -11,10 +11,12 @@ jobs:
           command: |
             source /root/emsdk-portable/emsdk_env.sh
             emcc --version
+            rustup override set nightly
             rustup component add rustfmt
       - run:
           name: Check formatting
           command: |
+            rustup override set nightly
             rustfmt --version
             cargo fmt
             git diff --exit-code
@@ -22,9 +24,11 @@ jobs:
           name: Cargo build
           command: |
             source /root/emsdk-portable/emsdk_env.sh
+            rustup override set nightly
             cargo build --release --target asmjs-unknown-emscripten
       - run:
           name: Make All
           command: |
             source /root/emsdk-portable/emsdk_env.sh
+            rustup override set nightly
             make
