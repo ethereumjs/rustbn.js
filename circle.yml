@@ -10,6 +10,7 @@ jobs:
           name: Go
           command: |
             source /root/emsdk-master/emsdk_env.sh
+            source ~/.bashrc
             emcc --version
             rustfmt --version
             cargo fmt
