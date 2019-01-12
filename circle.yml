@@ -3,7 +3,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: jeremigendron/emcc-rust:ubuntu
+      - image: jeremigendron/rust-asmjs-wasm
     steps:
       - checkout
       - run:
