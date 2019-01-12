@@ -3,7 +3,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: jeremigendron/rust-emcc
+      - image: jeremigendron/nice
     steps:
       - checkout
       - run:
