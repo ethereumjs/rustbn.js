@@ -14,4 +14,4 @@ jobs:
             rustfmt --version
             cargo fmt
             git diff --exit-code
-            make wasm
+            sudo make
