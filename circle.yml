@@ -14,4 +14,4 @@ jobs:
             rustfmt --version
             cargo fmt
             git diff --exit-code
-            sudo make
+            whoami
