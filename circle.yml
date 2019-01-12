@@ -20,7 +20,11 @@ jobs:
             git diff --exit-code
       - run:
           name: Cargo build
-          command: cargo build --release --target asmjs-unknown-emscripten
+          command: |
+            source /root/.bashrc
+            cargo build --release --target asmjs-unknown-emscripten
       - run:
           name: Make All
-          command: make
+          command: |
+            source /root/.bashrc 
+            make
