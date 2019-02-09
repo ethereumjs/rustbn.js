@@ -1,4 +1,3 @@
-language: rust
 dist: xenial
 
 addons:
@@ -17,18 +16,20 @@ branches:
 env:
   global:
     - DISPLAY=:99.0
-  matrix:
-    - CXX=g++-4.8 TEST_SUITE=test
 
 matrix:
   fast_finish: true
   include:
-    - os: linux
+    - language: node_js
       node_js: "8"
       env: CXX=g++-4.8 TEST_SUITE=test
+      script:
+        - npm run $TEST_SUITE
 
-script:
-  - npm run $TEST_SUITE
-  - rustfmt
-  - cargo build
-  - make
+    - language: rust
+      install:
+        - rustup component add rustfmt
+      script:
+        - rustfmt
+        - cargo build
+        - make
