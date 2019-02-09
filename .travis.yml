@@ -1,12 +1,5 @@
 dist: xenial
 
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    packages:
-    - g++-4.8
-
 branches:
   # We need to whitelist the branches which we want to have "push" automation.
   # Pull request automation is not constrained to this set of branches.
@@ -25,6 +18,7 @@ matrix:
     - language: rust
       install:
         - rustup component add rustfmt
+        - rustup target add asmjs-unknown-emscripten
       script:
         # the useful way to run rustfmt
         - cargo fmt --all -- --check
