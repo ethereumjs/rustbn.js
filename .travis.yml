@@ -13,10 +13,6 @@ branches:
   only:
   - master
 
-env:
-  global:
-    - DISPLAY=:99.0
-
 matrix:
   fast_finish: true
   include:
@@ -30,6 +26,7 @@ matrix:
       install:
         - rustup component add rustfmt
       script:
-        - rustfmt
+        # the useful way to run rustfmt
+        - cargo fmt --all -- --check
         - cargo build
         - make
