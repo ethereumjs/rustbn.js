@@ -11,16 +11,22 @@ matrix:
   include:
     - language: node_js
       node_js: "8"
-      env: CXX=g++-4.8 TEST_SUITE=test
+      env: TEST_SUITE=test
       script:
         - npm run $TEST_SUITE
 
     - language: rust
       install:
         - rustup component add rustfmt
+        # install emsdk
+        - git clone https://github.com/emscripten-core/emsdk.git
+        - ./emsdk/emsdk install latest
+        - ./emsdk/emsdk activate latest
         - rustup target add asmjs-unknown-emscripten
       script:
         # the useful way to run rustfmt
         - cargo fmt --all -- --check
+        # activate Emscripten
+        - source ./emsdk/emsdk_env.sh
         - cargo build
         - make
