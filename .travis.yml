@@ -20,8 +20,8 @@ matrix:
         - rustup component add rustfmt
         # install emsdk
         - git clone https://github.com/emscripten-core/emsdk.git
-        - ./emsdk/emsdk install latest-upstream
-        - ./emsdk/emsdk activate latest-upstream
+        - ./emsdk/emsdk install latest
+        - ./emsdk/emsdk activate latest
         - rustup target add asmjs-unknown-emscripten
       script:
         # the useful way to run rustfmt
