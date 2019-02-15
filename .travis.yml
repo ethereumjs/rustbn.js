@@ -19,7 +19,7 @@ matrix:
       rust: "1.27.2"
       env: EMSDK_VERSION=1.38.21
       install:
-        - rustup component add rustfmt
+        #- rustup component add rustfmt
         # install emsdk
         - git clone https://github.com/emscripten-core/emsdk.git
         - ./emsdk/emsdk install $EMSDK_VERSION
