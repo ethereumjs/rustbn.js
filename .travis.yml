@@ -16,12 +16,14 @@ matrix:
         - npm run $TEST_SUITE
 
     - language: rust
+      rust: "1.27.2"
+      env: EMSDK_VERSION=1.38.21
       install:
         - rustup component add rustfmt
         # install emsdk
         - git clone https://github.com/emscripten-core/emsdk.git
-        - ./emsdk/emsdk install latest
-        - ./emsdk/emsdk activate latest
+        - ./emsdk/emsdk install $EMSDK_VERSION
+        - ./emsdk/emsdk activate $EMSDK_VERSION
         - rustup target add asmjs-unknown-emscripten
       script:
         # the useful way to run rustfmt
