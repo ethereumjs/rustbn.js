@@ -17,7 +17,7 @@ matrix:
 
     - language: rust
       rust: "1.27.2"
-      env: EMSDK_VERSION=sdk-1.38.21
+      env: EMSDK_VERSION=sdk-1.38.21-64bit
       install:
         #- rustup component add rustfmt
         # install emsdk
