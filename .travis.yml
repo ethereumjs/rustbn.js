@@ -30,5 +30,7 @@ matrix:
         - cargo fmt --all -- --check
         # activate Emscripten
         - source ./emsdk/emsdk_env.sh
-        - cargo build
+        # no need to run cargo build anymore
+        # https://github.com/ethereumjs/rustbn.js/pull/36/files#r257229082
+        #- cargo build
         - make
