@@ -16,6 +16,8 @@ matrix:
         - npm run $TEST_SUITE
 
     - language: rust
+      install:
+        - rustup component add rustfmt
       script:
         - cargo fmt --all -- --check
 
@@ -24,7 +26,6 @@ matrix:
       #env: EMSDK_VERSION=sdk-1.38.21-64bit
       env: EMSDK_VERSION=latest
       install:
-        #- rustup component add rustfmt
         # install emsdk
         - git clone https://github.com/emscripten-core/emsdk.git
         - ./emsdk/emsdk install $EMSDK_VERSION
