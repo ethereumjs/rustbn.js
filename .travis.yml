@@ -16,8 +16,9 @@ matrix:
         - npm run $TEST_SUITE
 
     - language: rust
-      rust: "1.27.2"
-      env: EMSDK_VERSION=sdk-1.38.21-64bit
+      #rust: "1.27.2"
+      #env: EMSDK_VERSION=sdk-1.38.21-64bit
+      env: EMSDK_VERSION=latest
       install:
         #- rustup component add rustfmt
         # install emsdk
