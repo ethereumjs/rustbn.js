@@ -15,7 +15,7 @@ matrix:
       script:
         - npm run $TEST_SUITE
 
-    - lanugage: rust
+    - language: rust
       script:
         - cargo fmt --all -- --check
 
