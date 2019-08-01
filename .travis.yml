@@ -1,4 +1,4 @@
-dist: xenial
+dist: bionic
 
 branches:
   # We need to whitelist the branches which we want to have "push" automation.
@@ -15,6 +15,10 @@ matrix:
       script:
         - npm run $TEST_SUITE
 
+    - lanugage: rust
+      script:
+        - cargo fmt --all -- --check
+
     - language: rust
       #rust: "1.27.2"
       #env: EMSDK_VERSION=sdk-1.38.21-64bit
@@ -27,8 +31,6 @@ matrix:
         - ./emsdk/emsdk activate $EMSDK_VERSION
         - rustup target add asmjs-unknown-emscripten
       script:
-        # the useful way to run rustfmt
-        - cargo fmt --all -- --check
         # activate Emscripten
         - source ./emsdk/emsdk_env.sh
         # no need to run cargo build anymore
