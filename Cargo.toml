@@ -7,6 +7,5 @@ authors = ["holgerd77 <Holger.Drewes@gmail.com>",
 publish = false
 
 [dependencies]
-ethereum-bn128 = { git = "https://github.com/ewasm/ethereum-bn128.rs" }
-parity-bytes = { git = "https://github.com/paritytech/parity-common" }
+ethereum-bn128 = { git = "https://github.com/ewasm/ethereum-bn128.rs", tag = "0.1.0" }
 rustc-hex = "1.0"
