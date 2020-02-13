@@ -62,6 +62,29 @@ running:
 make
 ```
 
+### Docker
+
+This repository also contains a `Dockefile` which makes it easier to install
+the dependencies and tools described above in a docker container by following
+the next instructions.
+
+Build the docker image:
+
+```
+docker build . -t rustbn
+```
+
+Run the container:
+
+```
+docker run -v <path_to_the_rustbn.js_project>:/rustbn.js  -it rustbn
+```
+
+Once inside the container the project can be compiled by executing:
+
+```
+make
+```
 
 ### WASM (Experimental)
 
