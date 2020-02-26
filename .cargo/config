@@ -3,4 +3,5 @@
 rustflags = [
   "-Clink-args=-s NO_DYNAMIC_EXECUTION=1",
   "-Clink-args=-s NODEJS_CATCH_EXIT=0",
+  "-Clink-args=-s EXTRA_EXPORTED_RUNTIME_METHODS=['cwrap']",
 ]
