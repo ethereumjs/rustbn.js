@@ -1,6 +1,6 @@
 # SYNOPSIS 
 [![Build Status](https://img.shields.io/travis/ethereumjs/rustbn.js.svg?branch=master&style=flat-square)](https://travis-ci.org/ethereumjs/rustbn.js)
-[![Gitter](https://img.shields.io/gitter/room/ethereum/ethereumjs-lib.svg?style=flat-square)](https://gitter.im/ethereum/ethereumjs-lib) or #ethereumjs on freenode  
+[![Discord][discord-badge]][discord-link]
 
 Rust to Javascript/Webassembly compilation of [ethereum-bn128.rs](https://github.com/ewasm/ethereum-bn128.rs).
 
@@ -120,3 +120,5 @@ at your option.
 
 Copyright 2016 [Zcash Electric Coin Company](https://z.cash/). The Zcash Company promises to maintain the "bn" crate on crates.io under this MIT/Apache-2.0 dual license.
  
+[discord-badge]: https://img.shields.io/static/v1?logo=discord&label=discord&message=Join&color=blue
+[discord-link]: https://discord.gg/TNwARpR
