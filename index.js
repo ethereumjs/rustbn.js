@@ -5,15 +5,15 @@ const ec_mul = bn128.cwrap('ec_mul', 'string', ['string'])
 const ec_pairing = bn128.cwrap('ec_pairing', 'string', ['string'])
 
 function bn128add (input) {
-  return Buffer.from(ec_add(input.toString('hex')), 'hex')
+  return ec_add(input)
 }
 
 function bn128mul (input) {
-  return Buffer.from(ec_mul(input.toString('hex')), 'hex')
+  return ec_mul(input)
 }
 
 function bn128pairing (input) {
-  return Buffer.from(ec_pairing(input.toString('hex')), 'hex')
+  return ec_pairing(input)
 }
 
 module.exports = {
