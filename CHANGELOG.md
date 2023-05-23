@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 (modification: no type change headlines) and this project adheres to 
 [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2023-05-23
+- Breaking: remove Buffer from API for all three API calls (`add`, `mul`, `pairing`) for both input and output to improve browser compatibility (use plain hex strings directly now), PR [#46](https://github.com/ethereumjs/rustbn.js/pull/46)
+
+[0.3.0]: https://github.com/ethereumjs/rustbn.js/compare/v0.2.0...v0.3.0
 
 ## [0.2.0] - 2018-07-19
 - Added successful test case for each operation, PR[#19](https://github.com/ethereumjs/rustbn.js/pull/19)

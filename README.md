@@ -24,21 +24,21 @@ const bn128 = require('rustbn.js')
 Curve Addition
 
 ```
-let inputBuffer = ...
-let outputBuffer = bn128.add(inputBuffer)
+let inputHexString = ...
+let outputHexString = bn128.add(inputHexString)
 ```
 
 Curve Multiplication
 
 ```
-let inputBuffer = ...
-let outputBuffer = bn128.mul(inputBuffer)
+let inputHexString = ...
+let outputHexString = bn128.mul(inputHexString)
 ```
 
 Curve Pairing
 ```
-let inputBuffer = ...
-let outputBuffer = bn128.pairing(inputBuffer)
+let inputHexString = ...
+let outputHexString = bn128.pairing(inputHexString)
 ```
 
 ## Developer
