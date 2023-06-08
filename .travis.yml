@@ -1,17 +1,4 @@
-sudo: false
-os:
-  - linux
-
-language: node_js
-node_js:
-  - "8"
-
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    packages:
-    - g++-4.8
+dist: bionic
 
 branches:
   # We need to whitelist the branches which we want to have "push" automation.
@@ -19,17 +6,32 @@ branches:
   only:
   - master
 
-env:
-  global:
-    - DISPLAY=:99.0
-  matrix:
-    - CXX=g++-4.8 TEST_SUITE=test
-
 matrix:
   fast_finish: true
   include:
-    - os: linux
+    - language: node_js
       node_js: "8"
-      env: CXX=g++-4.8 TEST_SUITE=test
+      env: TEST_SUITE=test
+      script:
+        - npm run $TEST_SUITE
 
-script: npm run $TEST_SUITE
+    - language: rust
+      install:
+        - rustup component add rustfmt
+      script:
+        - cargo fmt --all -- --check
+
+    - language: rust
+      #rust: "1.27.2"
+      #env: EMSDK_VERSION=sdk-1.38.21-64bit
+      env: EMSDK_VERSION=latest-upstream
+      install:
+        # install emsdk
+        - git clone https://github.com/emscripten-core/emsdk.git
+        - ./emsdk/emsdk install $EMSDK_VERSION
+        - ./emsdk/emsdk activate $EMSDK_VERSION
+        - rustup target add asmjs-unknown-emscripten
+      script:
+        # activate Emscripten
+        - source ./emsdk/emsdk_env.sh
+        - make
