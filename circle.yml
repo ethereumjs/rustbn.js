@@ -1,0 +1,20 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: jeremigendron/nice
+    steps:
+      - checkout
+      - run:
+          name: Go
+          command: |
+            source /root/emsdk-master/emsdk_env.sh
+            source /root/.cargo/env
+            export PATH=$PATH:/root/emsdk-master/clang/*/
+            llvm-nm --version
+            emcc --version
+            rustfmt --version
+            cargo fmt
+            git diff --exit-code
+            make
