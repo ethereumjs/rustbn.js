@@ -13,7 +13,5 @@ all:
 	sed -ibak 's/run();$$/Module\["arguments"\]=\[\];run();module\.exports=Module;/' lib/index.asm.js
 
 wasm:
-	cargo build --target=wasm32-unknown-emscripten --release
-	mkdir -p exp
-	find target/wasm32-unknown-emscripten/release/deps -type f -name "*.wasm" | xargs -I {} cp {} exp/rustbn.wasm
-	find target/wasm32-unknown-emscripten/release/deps -type f ! -name "*.asm.js" -name "*.js" | xargs -I {} cp {} exp/index.wasm.js
+	cargo build --target=wasm32-unknown-unknown --release
+	cp target/wasm32-unknown-unknown/release/rustbn-js.wasm lib/rustbn.wasm
